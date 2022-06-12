@@ -1,8 +1,6 @@
 package com.naveen.crudapp.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.naveen.crudapp.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +47,19 @@ public class CustomerServices {
 		list.add(45);
 		System.out.println(list);
 		return repository.getCustomerDetailsByFirstName();
+	}
+
+	public Map<String, Map<String, String>> getEmpDetails(String name){
+		List<Customer> customerList = new ArrayList<>();
+		Map<String, String> midDataMap = new HashMap<>();
+		Map<String, Map<String, String>> finalMapResultSet = new HashMap<>();
+		customerList = repository.findByFirstname(name);
+
+		for (Customer customer: customerList) {
+			midDataMap.put(customer.getAddress(),String.valueOf(customer.getAge()));
+			finalMapResultSet.put(customer.getLastname(),midDataMap);
+		}
+
+		return finalMapResultSet;
 	}
 }

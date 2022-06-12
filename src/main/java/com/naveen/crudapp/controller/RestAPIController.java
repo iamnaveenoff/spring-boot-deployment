@@ -2,6 +2,7 @@ package com.naveen.crudapp.controller;
 
 import java.util.*;
 
+import com.naveen.crudapp.cache.CacheExample;
 import com.naveen.crudapp.model.Customer;
 import com.naveen.crudapp.model.Message;
 import com.naveen.crudapp.service.CustomerServices;
@@ -25,13 +26,13 @@ public class RestAPIController {
 	@Autowired
 	CustomerServices customerServices;
 
+	CacheExample cacheExample;
+
 	@GetMapping("/hello")
-//	public Map<String, String> restAPITesting(){
-	public ResponseEntity<Message>  restAPITesting(){
-//		return Collections.singletonMap("status", "Application Run Successfully");
-		List<Customer> customerInfos = customerServices.getCustomerDetilasList();
-		return new ResponseEntity<Message>(new Message("Get Customers' dummy !",
-				customerInfos, ""), HttpStatus.OK);
+	public Map<String, String> restAPITesting() throws Exception {
+		cacheExample.get("naveen");
+		return Collections.singletonMap("status", "Application Run Successfully");
+
 	}
 
 	@PostMapping("/create")

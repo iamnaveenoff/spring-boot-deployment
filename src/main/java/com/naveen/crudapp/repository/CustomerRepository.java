@@ -13,6 +13,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>{
 
     @Query(value = "SELECT firstname, lastname from customer WHERE age in (25,45)", nativeQuery = true)
     List<Customer> getCustomerDetailsByFirstName();
+
+    List<Customer> findByAge(int age);
+    List<Customer> findByFirstname(String name);
     //    List<Customer> getCustomerDetailsByFirstName(@Param("age") List<Integer> agelist);
 
 }
